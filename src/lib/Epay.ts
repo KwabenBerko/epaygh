@@ -100,7 +100,10 @@ export class Epay {
 
   private updateTokenIfNecessary = async () => {
     try {
-      if (!this.token || moment().isAfter(moment(this.token.expires_at))) {
+      if (
+        !this.token ||
+        Date.now() > new Date(this.token.expires_at).getTime()
+      ) {
         const newToken = await this.generateToken();
         this.token = newToken;
       }
