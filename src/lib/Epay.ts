@@ -4,6 +4,11 @@ import moment from "moment";
 import { Token } from "./interfaces/Token";
 import { MomoCharge } from "./interfaces/MomoCharge";
 import { MomoChargeResponse } from "./interfaces/MomoChargeResponse";
+import { CardCharge } from "./interfaces/CardCharge";
+import { CardChargeResponse } from "./interfaces/CardChargeResponse.";
+import { Customer } from "./interfaces/Customer";
+import { ListCustomersResponse } from "./ListCustomersResponse";
+import { TransactionDetail } from "./interfaces/TransactionDetail";
 
 const EPAY_API_BASE_ENDPOINT = "https://epaygh.com/api/v1";
 
@@ -15,7 +20,7 @@ export class Epay {
     }
   }
 
-  createToken = async (): Promise<Token> => {
+  generateToken = async (): Promise<Token> => {
     try {
       const response = await axios.post(
         `${EPAY_API_BASE_ENDPOINT}/token`,
@@ -28,7 +33,9 @@ export class Epay {
     }
   };
 
-  charge = async (data: MomoCharge): Promise<MomoChargeResponse> => {
+  chargeViaMobileMoney = async (
+    data: MomoCharge
+  ): Promise<MomoChargeResponse> => {
     try {
       await this.updateTokenIfNecessary();
       const response = await axios.post(
@@ -46,11 +53,55 @@ export class Epay {
     }
   };
 
+  chargeViaCreditCard = async (
+    data: CardCharge
+  ): Promise<CardChargeResponse> => {
+    try {
+      await this.updateTokenIfNecessary();
+      const response = await axios.post(
+        `${EPAY_API_BASE_ENDPOINT}/charge`,
+        data,
+        {
+          headers: {
+            Authorization: `Bearer ${this.token.access_token}`
+          }
+        }
+      );
+      return response.data.data;
+    } catch (err) {
+      throw err;
+    }
+  };
+
+  listCustomers = async (): Promise<ListCustomersResponse> => {
+    await this.updateTokenIfNecessary();
+    const response = await axios.get(`${EPAY_API_BASE_ENDPOINT}/customers`, {
+      headers: {
+        Authorization: `Bearer ${this.token.access_token}`
+      }
+    });
+    return response.data.customers;
+  };
+
+  retrieveTransactionDetails = async (
+    reference: string
+  ): Promise<TransactionDetail> => {
+    await this.updateTokenIfNecessary();
+    const response = await axios.get(
+      `${EPAY_API_BASE_ENDPOINT}/transactions/${reference}`,
+      {
+        headers: {
+          Authorization: `Bearer ${this.token.access_token}`
+        }
+      }
+    );
+    return response.data.transaction;
+  };
+
   private updateTokenIfNecessary = async () => {
     try {
       if (!this.token || moment().isAfter(moment(this.token.expires_at))) {
-        console.log("UPDATED.");
-        const newToken = await this.createToken();
+        const newToken = await this.generateToken();
         this.token = newToken;
       }
     } catch (err) {

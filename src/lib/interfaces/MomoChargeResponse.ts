@@ -1,7 +1,7 @@
 import { Customer } from "./Customer";
-import { Transaction } from "./Transaction";
+import { MomoTransaction } from "./MomoTransaction";
 
 export interface MomoChargeResponse {
   customer: Customer;
-  transaction: Transaction;
+  transaction: MomoTransaction;
 }
