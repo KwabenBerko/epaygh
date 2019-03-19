@@ -1,12 +1,10 @@
 import { Config } from "./interfaces/Config";
 import axios from "axios";
-import moment from "moment";
 import { Token } from "./interfaces/Token";
 import { MomoCharge } from "./interfaces/MomoCharge";
 import { MomoChargeResponse } from "./interfaces/MomoChargeResponse";
 import { CardCharge } from "./interfaces/CardCharge";
 import { CardChargeResponse } from "./interfaces/CardChargeResponse.";
-import { Customer } from "./interfaces/Customer";
 import { ListCustomersResponse } from "./ListCustomersResponse";
 import { TransactionDetail } from "./interfaces/TransactionDetail";
 
@@ -20,6 +18,10 @@ export class Epay {
     }
   }
 
+  /**
+   * @async
+   * @returns {Promise<Token>} Promise<Token>
+   */
   generateToken = async (): Promise<Token> => {
     try {
       const response = await axios.post(
@@ -33,6 +35,11 @@ export class Epay {
     }
   };
 
+  /**
+   * @async
+   * @param {MomoCharge} MomoCharge
+   * @returns {Promise<MomoChargeResponse>} Promise<MomoChargeResponse>
+   */
   chargeViaMobileMoney = async (
     data: MomoCharge
   ): Promise<MomoChargeResponse> => {
@@ -53,6 +60,11 @@ export class Epay {
     }
   };
 
+  /**
+   * @async
+   * @param {CardCharge} CardCharge
+   * @returns {Promise<CardChargeResponse>} Promise<CardChargeResponse>
+   */
   chargeViaCreditCard = async (
     data: CardCharge
   ): Promise<CardChargeResponse> => {
@@ -73,6 +85,10 @@ export class Epay {
     }
   };
 
+  /**
+   * @async
+   * @returns {Promise<ListCustomersResponse>} Promise<ListCustomersResponse>
+   */
   listCustomers = async (): Promise<ListCustomersResponse> => {
     await this.updateTokenIfNecessary();
     const response = await axios.get(`${EPAY_API_BASE_ENDPOINT}/customers`, {
@@ -83,6 +99,11 @@ export class Epay {
     return response.data.customers;
   };
 
+  /**
+   * @async
+   * @param {string} referencew
+   * @returns {Promise<TransactionDetail>} Promise<TransactionDetail>
+   */
   retrieveTransactionDetails = async (
     reference: string
   ): Promise<TransactionDetail> => {

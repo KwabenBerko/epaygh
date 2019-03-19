@@ -2,13 +2,25 @@
   "name": "epaygh",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "./dist/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "prepublish": "tsc"
   },
-  "keywords": [],
+  "keywords": [
+    "epaygh",
+    "payments",
+    "node.js"
+  ],
   "author": "Kwabena Berko <kwabenaberko95@gmail.com> (https://github.com/KwabenBerko)",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/KwabenBerko/epaygh"
+  },
+  "bugs": {
+    "url": "https://github.com/KwabenBerko/epaygh/issues"
+  },
+  "homepage": "https://github.com/KwabenBerko/epaygh#readme",
   "devDependencies": {
     "@types/uuid": "^3.4.4",
     "nodemon": "^1.18.10",
