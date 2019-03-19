@@ -12,7 +12,7 @@ export interface Charge {
   amount: number;
 
   /**
-   * @property This is the currency code.
+   * @property Optional. This is the currency code.
    * The default is GHS.
    * See our [supported currencies](https://docs.epaygh.com/docs/supported-currencies/)
    */
@@ -34,7 +34,7 @@ export interface Charge {
   customer_telephone: string;
 
   /**
-   * @property This is the description of the payment.
+   * @property Optional. This is the description of the payment.
    */
   payment_description?: string;
 }

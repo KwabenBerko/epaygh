@@ -1,6 +1,6 @@
 {
   "name": "epaygh",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A Node.js wrapper for Epay's API.",
   "main": "./dist/index.js",
   "scripts": {

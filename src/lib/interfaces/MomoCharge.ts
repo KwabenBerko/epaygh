@@ -17,7 +17,7 @@ export interface MomoCharge extends Charge {
   mobile_wallet_network: string;
 
   /**
-   * @property This is the voucher the user generates to authorize the payment.
+   * @property Optional. This is the voucher the user generates to authorize the payment.
    */
   voucher?: string;
 }
