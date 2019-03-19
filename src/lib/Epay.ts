@@ -90,13 +90,17 @@ export class Epay {
    * @returns {Promise<ListCustomersResponse>} Promise<ListCustomersResponse>
    */
   listCustomers = async (): Promise<ListCustomersResponse> => {
-    await this.updateTokenIfNecessary();
-    const response = await axios.get(`${EPAY_API_BASE_ENDPOINT}/customers`, {
-      headers: {
-        Authorization: `Bearer ${this.token.access_token}`
-      }
-    });
-    return response.data.customers;
+    try {
+      await this.updateTokenIfNecessary();
+      const response = await axios.get(`${EPAY_API_BASE_ENDPOINT}/customers`, {
+        headers: {
+          Authorization: `Bearer ${this.token.access_token}`
+        }
+      });
+      return response.data.customers;
+    } catch (err) {
+      throw err;
+    }
   };
 
   /**
@@ -107,16 +111,20 @@ export class Epay {
   retrieveTransactionDetails = async (
     reference: string
   ): Promise<TransactionDetail> => {
-    await this.updateTokenIfNecessary();
-    const response = await axios.get(
-      `${EPAY_API_BASE_ENDPOINT}/transactions/${reference}`,
-      {
-        headers: {
-          Authorization: `Bearer ${this.token.access_token}`
+    try {
+      await this.updateTokenIfNecessary();
+      const response = await axios.get(
+        `${EPAY_API_BASE_ENDPOINT}/transactions/${reference}`,
+        {
+          headers: {
+            Authorization: `Bearer ${this.token.access_token}`
+          }
         }
-      }
-    );
-    return response.data.transaction;
+      );
+      return response.data.transaction;
+    } catch (err) {
+      throw err;
+    }
   };
 
   private updateTokenIfNecessary = async () => {
