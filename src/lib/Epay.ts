@@ -22,7 +22,7 @@ export class Epay {
    * @async
    * @returns {Promise<Token>} Promise<Token>
    */
-  generateToken = async (): Promise<Token> => {
+  private generateToken = async (): Promise<Token> => {
     try {
       const response = await axios.post(
         `${EPAY_API_BASE_ENDPOINT}/token`,
@@ -101,7 +101,7 @@ export class Epay {
 
   /**
    * @async
-   * @param {string} referencew
+   * @param {string} reference
    * @returns {Promise<TransactionDetail>} Promise<TransactionDetail>
    */
   retrieveTransactionDetails = async (
