@@ -5,7 +5,7 @@ import { MomoCharge } from "./interfaces/MomoCharge";
 import { MomoChargeResponse } from "./interfaces/MomoChargeResponse";
 import { CardCharge } from "./interfaces/CardCharge";
 import { CardChargeResponse } from "./interfaces/CardChargeResponse.";
-import { ListCustomersResponse } from "./ListCustomersResponse";
+import { ListCustomersResponse } from "./interfaces/ListCustomersResponse";
 import { TransactionDetail } from "./interfaces/TransactionDetail";
 
 const EPAY_API_BASE_ENDPOINT = "https://epaygh.com/api/v1";

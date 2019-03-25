@@ -1,4 +1,4 @@
-import { Customer } from "./interfaces/Customer";
+import { Customer } from "./Customer";
 
 export interface ListCustomersResponse {
   current_page: number;

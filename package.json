@@ -4,7 +4,8 @@
   "description": "A Node.js wrapper for Epay's API.",
   "main": "./dist/index.js",
   "scripts": {
-    "prepublish": "tsc"
+    "prepublish": "npm run build",
+    "build": "tsc"
   },
   "keywords": [
     "epaygh",
